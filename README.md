@@ -1,2 +1,2 @@
 # pair-programming
-pair programming with Cayden
+Pair programming with Cayden & Odin
