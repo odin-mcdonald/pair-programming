@@ -31,15 +31,15 @@
           Fiction
         </label>
 
-        <label for="fiction">
+        <label for="non-fiction">
             <input
               type="radio"
-              id="fiction"
+              id="non-fiction"
               name="genre"
-              value="fiction"
+              value="non-fiction"
               required="required"
             />
-            Fiction
+            Non-fiction
           </label>
 
     </p>
@@ -95,7 +95,7 @@
     </fieldset>
 
     <p>
-        <label for="ice-cream">
+        <label for="source">
             How did I get this book?
             <select name="source" id="source" required>
               <option value="" selected>- Select option - ...</option>
@@ -132,9 +132,9 @@
         <td>{{ book.title }}</td>
         <td>{{ book.author }}</td>
         <td>{{ book.pages }}</td>
-        <td>{{ book.classification }}</td>
+        <td>{{ book.genre }}</td>
         <td>{{ book.details }}</td>
-        <td>{{ book.acquisition }}</td>
+        <td>{{ book.source }}</td>
       </tr>
       {% endfor %}
     </tbody>

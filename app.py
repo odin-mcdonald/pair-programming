@@ -1,9 +1,14 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, flash
 
 app = Flask(__name__)
 
+# Handling error 404 and displaying relevant web page
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template("404.html"), 404
+
 books_dict = [
-{"title": "The Hobbit", "author": "J.R.R. Tolkien", "pages": 295, "classification": "Fiction", "details": "read,recommend", "acquisition": "library"}
+{"title": "The Hobbit", "author": "J.R.R. Tolkien", "pages": 295, "genre": "Fiction", "details": "read,recommend", "source": "library"}
 ]
 
 
@@ -24,17 +29,17 @@ def add():
         title = form["title"]
         author = form["author"]
         pages = form["pages"]
-        classification = form["classification"]
-        details = form.getlist("details")  # this is a PYthon list
-        acquisition = form["acquisition"]
+        genre = form["genre"]
+        details = form.getlist("details")
+        source = form["source"]
         #activities = form.getlist("activities")  # this is a PYthon list
 
         print(title)
         print(author)
         print(pages)
-        print(classification)
+        print(genre)
         print(details)
-        print(acquisition)
+        print(source)
 
         details_string = ", ".join(details)  # make the Python list into a string
 
@@ -42,9 +47,9 @@ def add():
             "title": title,
             "author": author,
             "pages": pages,
-            "classification": classification,
+            "genre": genre,
             "details": details_string,
-            "acqusition": acquisition,
+            "source": source,
         }
 
         print(book_dict)
@@ -63,3 +68,6 @@ def about():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    #Before publishing, debug=FALSE
+
+
