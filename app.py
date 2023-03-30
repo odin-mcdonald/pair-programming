@@ -2,15 +2,15 @@ from flask import Flask, request, render_template, redirect, url_for
 
 app = Flask(__name__)
 
-friends_dict = [
-    {"name": "Test", "flavor": "swirl", "read": "yes", "activities": "reading"}
+books_dict = [
+{"title": "The Hobbit", "author": "J.R.R. Tolkien", "pages": 295, "classification": "Fiction", "details": "read,recommend", "acquisition": "library"}
 ]
 
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     return render_template(
-        "index.html", pageTitle="Homepage", friends=friends_dict
+        "index.html", pageTitle="Homepage", books=books_dict
     )
 
 
@@ -21,30 +21,37 @@ def add():
 
         form = request.form
 
-        fname = form["fname"]
-        flavor = form["flavor"]
-        read = form["read"]
-        activities = form.getlist("activities")  # this is a PYthon list
+        title = form["title"]
+        author = form["author"]
+        pages = form["pages"]
+        classification = form["classification"]
+        details = form.getlist("details")  # this is a PYthon list
+        acquisition = form["acquisition"]
+        #activities = form.getlist("activities")  # this is a PYthon list
 
-        print(fname)
-        print(flavor)
-        print(read)
-        print(activities)
+        print(title)
+        print(author)
+        print(pages)
+        print(classification)
+        print(details)
+        print(acquisition)
 
-        activities_string = ", ".join(activities)  # make the Python list into a string
+        details_string = ", ".join(details)  # make the Python list into a string
 
-        friend_dict = {
-            "name": fname,
-            "flavor": flavor,
-            "read": read,
-            "activities": activities_string,
+        book_dict = {
+            "title": title,
+            "author": author,
+            "pages": pages,
+            "classification": classification,
+            "details": details_string,
+            "acqusition": acquisition,
         }
 
-        print(friend_dict)
-        friends_dict.append(
-            friend_dict
-        )  # append this dictionary entry to the larger friends dictionary
-        print(friends_dict)
+        print(book_dict)
+        books_dict.append(
+            book_dict
+        )  # append this dictionary entry to the larger books dictionary
+        print(books_dict)
         return redirect(url_for("index"))
     else:
         return redirect(url_for("index"))
