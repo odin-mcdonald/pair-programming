@@ -7,6 +7,11 @@ app = Flask(__name__)
 def not_found_error(error):
     return render_template("404.html"), 404
 
+# Handling error 500 and displaying relevant web page
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template("500.html"), 500
+
 books_dict = [
 {"title": "The Hobbit", "author": "J.R.R. Tolkien", "pages": 295, "genre": "Fiction", "details": "read,recommend", "source": "library"}
 ]
@@ -63,11 +68,11 @@ def add():
     
 @app.route("/about")
 def about():
-    return render_template ("about.html")
+    return rexder_template ("about.html")
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
     #Before publishing, debug=FALSE
 
 
