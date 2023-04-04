@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for, flash
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "your_random_string"
 
 # Handling error 404 and displaying relevant web page
 @app.errorhandler(404)
@@ -46,6 +47,8 @@ def add():
         print(details)
         print(source)
 
+        flash('Record successfully added.', 'success')
+
         details_string = ", ".join(details)  # make the Python list into a string
 
         book_dict = {
@@ -68,11 +71,11 @@ def add():
     
 @app.route("/about")
 def about():
-    return rexder_template ("about.html")
+    return render_template ("about.html")
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
     #Before publishing, debug=FALSE
 
 
